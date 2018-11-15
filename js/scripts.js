@@ -3,7 +3,6 @@
 console.log('Starting CityView...')
 
 function loadData() {
-  console.log('runnign load')
   var data = {
     resource_id: 'c53f0204-3b39-4a33-8068-64168dbe9847', // the resource id
     limit: 5, // get 5 results
@@ -18,5 +17,5 @@ function loadData() {
     }
   });
 
-
+  
 }
