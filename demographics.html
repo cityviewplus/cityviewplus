@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>CityView Home</title>
+  <title>CityView Demographics</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css" type="text/css">
@@ -17,21 +17,12 @@
 <body>
   <div>
     <div id=navBar></div>
-    <section class="section">
-        <section class="hero is-medium box">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Welcome to CityView+!
-                    </h1>
-                    <h2 class="subtitle">
-                        Data visualizations for urban development and enrichment.
-                    </h2>
-                </div>
-            </div>
-        </section>
-    </section>
   </div>
+  <div class="section">
+    <p id="json"></p>
+    <ul id="jsonList"></ul>
+  </div>
+  <script src="js/dataset_processing.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 </html>
