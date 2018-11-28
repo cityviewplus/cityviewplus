@@ -2,18 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-  <script>
-    $(document).ready(function() {
-      $("#navBar").load("navBar.html");
-    });
-  </script>
-  <script src="js/scripts.js"></script>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 </head>
 
 <body>
@@ -35,7 +25,7 @@
     <!-- Navbar -->
     <nav class="navbar is-spaced has-shadow is-mobile">
       <div class="navbar-brand">
-        <a class="navbar-item title title-padding">CityView+</a>
+        <a class="navbar-item title title-padding" href="index.html">CityView+</a>
       </div>
       <div class="navbar-menu">
         <div class="navbar-end">
@@ -44,15 +34,18 @@
               More
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item">
+              <a class="navbar-item" href="livability.html">
                 Livability
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item" href="events.html">
                 Events
+              </a>
+              <a class="navbar-item" href="demographics.html">
+                Demographics
               </a>
             </div>
           </div>
-          <a class="navbar-item subtitle is-5">About</a>
+          <a class="navbar-item" href="about.html">About</a>
         </div>
       </div>
     </nav>
