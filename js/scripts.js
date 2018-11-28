@@ -4,33 +4,6 @@ console.log('Starting CityView...');
 
 var read = `SELECT * FROM "20f64c02-6023-4280-8131-e8c0cedcae9b" LIMIT 100`;
 
-var data = getData(read, function(jsonArray) {
-  var ul = document.getElementById('jsonList');
-  var dataJson = addChildToJson(
-    mapJsonArray(jsonArray, 'Neighborhood', 'Percent of Population'), 'Neighborhood');
-
-  console.log(dataJson);
-
-  //https://stackoverflow.com/questions/921789/how-to-loop-through-a-plain-javascript-object-with-the-objects-as-members
-  // for (var key in dataJson) {
-  //   // skip loop if the property is from prototype
-  //   if (!dataJson.hasOwnProperty(key)) continue;
-  //
-  //   var obj = dataJson[key];
-  //   for (var prop in obj) {
-  //     // skip loop if the property is from prototype
-  //     if (!obj.hasOwnProperty(prop)) continue;
-  //
-  //     var node = document.createElement("LI");
-  //     var textnode = document.createTextNode(prop + " = " + obj[prop]);
-  //     node.appendChild(textnode);
-  //     ul.appendChild(node);
-  //   }
-  //
-  //   ul.innerHTML = ul.innerHTML + "--------------------------" + "<br/>";
-  // }
-});
-
 var width = 960,
     height = 700,
     radius = (Math.min(width, height) / 2) - 10;
@@ -69,11 +42,39 @@ d3.json("https://gist.githubusercontent.com/mbostock/4348373/raw/85f18ac90409caa
       .data(partition(root).descendants())
     .enter().append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color((d.children ? d : d.parent).data.name); })
+      .style("fill", function(d) {
+        console.log(d);
+        console.log(color((d.children ? d : d.parent).data.name));
+        return color((d.children ? d : d.parent).data.name);
+      })
       .on("click", click)
     .append("title")
       .text(function(d) { return d.data.name + "\n" + formatNumber(d.value); });
 });
+
+/*var data = getData(read, function(jsonArray) {
+  var ul = document.getElementById('jsonList');
+  var dataJson = addChildToJson(
+    mapJsonArray(jsonArray, 'Neighborhood', 'Percent of Population'), 'Neighborhood');
+
+  console.log(dataJson);
+
+  dataJson = d3.hierarchy(dataJson);
+  dataJson.sum(function(d) { return d.size; });
+  svg.selectAll("path")
+      .data(partition(dataJson).descendants())
+    .enter().append("path")
+      .attr("d", arc)
+      .style("fill", function(d) {
+        console.log(d);
+        console.log(color((d.children ? d : d.parent).data.name));
+        return color((d.children ? d : d.parent).data.name);
+      })
+      .on("click", click)
+    .append("title")
+      .text(function(d) { return d.data.name + "\n" + formatNumber(d.value); });
+
+});*/
 
 function click(d) {
   svg.transition()
