@@ -1,4 +1,28 @@
-#mapid {
-  z-index: 0;
-  height: 500px;
+html, body {
+  height: 100%;
 }
+
+body {
+  padding-top: 3.5rem
+}
+
+#navBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#leaflet-map {
+  z-index: 0;
+}
+
+.max-height {
+  height: 100%
+}
+
+.navbar {
+  padding: 0 10px 0 10px;
+}
+
