@@ -1,6 +1,6 @@
-var read = `SELECT * FROM "20f64c02-6023-4280-8131-e8c0cedcae9b"`;
+var query = `SELECT * FROM "20f64c02-6023-4280-8131-e8c0cedcae9b"`;
 
-getData(read, function(jsonArray) {
+getData(query, function(jsonArray) {
 
   var dataJson = d3.nest()
   .key(function (d) {return d.Decade;})
