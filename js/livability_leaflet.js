@@ -2,8 +2,7 @@ var map = L.map('leaflet-map', {
   preferCanvas: true
 }).setView([42.3601, -71.0589], 13);
 var showingWifi = false;
-var wifiLayer = null,
-  treesLayer = null;
+var wifiLayer = null;
 
 var treesCluster = L.markerClusterGroup({
   // iconCreateFunction is used if we are not using MarkerCluster.Default.css
