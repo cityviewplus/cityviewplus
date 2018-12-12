@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>CityView Livability</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-  crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-  integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-  crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <script>
-  $(document).ready(function(){
+    $(document).ready(function(){
     $("#navBar").load("navBar.html");
   });
   </script>
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
+
 <body>
-  <div>
-    <div id=navBar></div>
+  <div id=navBar></div>
+  <div class="section max-height">
+    <div class="columns max-height">
+      <div class="column is-2">
+        <aside class="menu box">
+          <p class="menu-label">
+            Livability
+          </p>
+          <ul class="menu-list">
+
+            <li><a onclick="showWifi()">Free WiFi Spots</a></li>
+            <li><a onclick="showTrees()">Trees</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column max-height">
+        <div class="box max-height">
+          <div class="max-height" id="leaflet-map"></div>
+        </div>
+      </div>
+    </div>
   </div>
-   <div id="mapid"></div>
+  <!-- <div id="leaflet-map"></div> -->
   <!-- <script src="js/scripts.js"></script> -->
   <script src="js/livability_leaflet.js"></script>
 </body>
+
 </html>
