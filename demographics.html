@@ -4,7 +4,6 @@
   <title>CityView Demographics</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
@@ -15,16 +14,18 @@
     $("#navBar").load("navBar.html");
   });
   </script>
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body>
   <div>
     <div id=navBar></div>
   </div>
   <div class="section">
-    <div class="box" id="chart" style="height:764px">
+    <div class="box" id="chart" style="height:1000px">
     </div>
   </div>
   <script src="js/dataset_processing.js"></script>
   <script src="js/scripts.js"></script>
+  <script src="js/sunburst.js"></script>
 </body>
 </html>

@@ -14,9 +14,10 @@ function getData(query, callback, url) {
     if (request.readyState === 4 && request.status === 200) {
       rawJson = JSON.parse(request.responseText);
       console.log(rawJson);
-      dataJsonArray = preprocessData(rawJson);
 
+      dataJsonArray = extractData(rawJson);
       console.log(dataJsonArray);
+
       callback(dataJsonArray);
       return dataJsonArray;
     }
@@ -27,12 +28,12 @@ function getData(query, callback, url) {
 }
 
 /*
- * Extracts dataset from Json object
+ * Extracts dataset from Json object we get from Analyze Boston
  * @param {Json} rawJson - Json object retrieved within getData(),
  * data is usually under result > records
  * @return {Json array} dataJsonArray - array of Json objects containing only the rows of the dataset
  */
-function preprocessData(rawJson) {
+function extractData(rawJson) {
   var dataJsonArray;
 
   if (rawJson) {
@@ -42,28 +43,6 @@ function preprocessData(rawJson) {
     console.log('No JSON object to preprocess');
   }
 
-}
-
-/*
- * Maps data in a Json object array to two key-value pairs (one value containing categorical data,
- * and the other containing numerical data)
- * @param {Json array} dataJsonArray - array of Json objects containing key-value pairs to be mapped
- * @param {string} catCol - column name containing categorical data
- * @param {string} numCol - column name containing numerical data
- * @param {string} catKey - optional parameter to name the key of the categorical data
- * @param {string} numKey - optional parameter to name the key of the numerical data
- * @return {Json array} mapped - array of Json objects contining the mapped key-value pairs
-*/
-function mapJsonArray(dataJsonArray, catCol, numCol, catKey, numKey) {
-  catKey = catKey || 'name';
-  numKey = numKey || 'size';
-  var mapped = dataJsonArray.map(function(d, i) {
-    return {
-      [catKey]: d[catCol],
-      [numKey]: d[numCol]
-    };
-  });
-  return mapped;
 }
 
 /*
