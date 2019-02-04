@@ -5,6 +5,7 @@ getData(query, function(jsonArray) {
   var height = 750;
   var width = 750;
   var radius = width / 8;
+  var pMargin = 30
 
   margin = ({
     top: 20,
@@ -74,55 +75,6 @@ getData(query, function(jsonArray) {
     .innerRadius(d => d.y0 * radius)
     .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1));
 
-  var chart2 = () => {
-    const root = partition(dataJson);
-
-    root.each(d => d.current = d);
-
-    // Variables for chart
-
-    x = d3.scaleBand()
-      .domain(d => d.data.name)
-      .range([margin.left, width])
-      .padding(0.1);
-
-    y = d3.scaleLinear()
-      .domain([0, d => d.value]).nice()
-      .range([height]);
-
-    xAxis = g => g
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0));
-
-    yAxis = g => g
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
-      .call(g => g.select(".domain").remove())
-
-    var svg = d3.select("#chart").append("svg")
-      .attr("width", width)
-      .attr("height", "100%")
-      //.attr("style", "margin-left:auto; margin-right:auto; display:block;")
-      .attr("style", "margin-left:auto; float:right; display:block;")
-      .style("font", "10px sans-serif");
-
-    const g = svg.append("g")
-      .attr("transform", `translate(${width / 2},${height / 2.05})`)
-      .attr("fill", "steelblue")
-      .selectAll("rect")
-      .data(root)
-      .attr("x", d => x(d.data.name))
-      .attr("y", d => y(d.value))
-      .attr("height", height)
-      .attr("width", width);
-
-    g.append("g")
-      .call(xAxis)
-      .call(yAxis);
-
-    return svg.node();
-
-  }
 
   var chart = () => {
     const root = partition(dataJson);
@@ -132,7 +84,15 @@ getData(query, function(jsonArray) {
     var svg = d3.select("#chart").append("svg")
       .attr("width", width)
       .attr("height", "100%")
-      .attr("style", "margin-left:auto; margin-right:auto; display:block;")
+      //.attr("style", "margin-left:auto; margin-right:auto; display:block;")
+      .attr("style", "margin-left:auto; float:right; display:block;")
+      .style("font", "10px sans-serif");
+
+    var svg2 = d3.select("#barChart").append("svg")
+      .attr("width", width)
+      .attr("height", "100%")
+      //.attr("style", "margin-left:auto; margin-right:auto; display:block;")
+      .attr("style", "margin-left:auto; float:right; display:block;")
       .style("font", "10px sans-serif");
 
     const g = svg.append("g")
@@ -147,7 +107,6 @@ getData(query, function(jsonArray) {
         //d = d.parent;
         //}
         if (d.depth == 3) {
-          console.log("got white")
           return color(d.data.name);
         } else if (d.depth == 2 && d.parent.data.name == "1950") {
           return yellow(d.data.name);
@@ -164,7 +123,6 @@ getData(query, function(jsonArray) {
         } else if (d.depth == 2 && d.parent.data.name == "2010") {
           return orange(d.data.name);
         } else {
-          console.log("got something else")
           return color(d.data.name);
         }
       })
@@ -209,11 +167,15 @@ getData(query, function(jsonArray) {
 
       if (p.depth == 2) {
 
-        var childrenList = []
+        svg2.selectAll("g").remove()
+        svg2.selectAll("rect").remove()
 
-        for(i = 0 ; i < 5 ; i++) {
-          childrenList.push(p.children[i].data.name);
-        }
+        root.each(d => d.target = {
+          x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+          x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+          y0: Math.max(0, d.y0 - p.depth),
+          y1: Math.max(0, d.y1 - p.depth)
+        });
 
         const t = g.transition().duration(750);
 
@@ -237,38 +199,61 @@ getData(query, function(jsonArray) {
           .attr("fill-opacity", d => +labelVisible(d.target))
           .attrTween("transform", d => () => labelTransform(d.current));
 
-        //const svg = d3.select(DOM.svg(width, height));
-        x = d3.scaleBand()
-          .domain(childrenList)
+        //Below is code for chart making
+
+        const barChart = svg2.append('g')
+          .attr('transform', `translate(${pMargin}, ${pMargin})`);
+
+        var childrenNames = []
+        var childrenValues = []
+        console.log(p.children[0].value)
+
+        for (i = 0; i < p.children.length; i++) {
+          childrenNames.push(p.children[i].data.name);
+        }
+
+        for (i = 0; i < p.children.length; i++) {
+          childrenValues.push(p.children[i].value);
+        }
+
+        var xScale = d3.scaleBand()
+          .domain(p.children.map(s => s.data.name))
           .range([margin.left, width - margin.right])
           .padding(0.1)
 
-        y = d3.scaleLinear()
-          .domain([0, p.value]).nice()
+        var yScale = d3.scaleLinear()
+          .domain([0, 100])
           .range([height - margin.bottom, margin.top])
 
-        xAxis = g => g
-          .attr("transform", `translate(0,${height - margin.bottom})`)
-          .call(d3.axisBottom(x).tickSizeOuter(0))
 
-        yAxis = g => g
+        // var xAxis = g => g
+        //   //.scale(x)
+        //   //.orient("bottom")
+        //   .attr("transform", `translate(0,${height - margin.bottom})`)
+        //   .call(d3.axisBottom(xScale).tickSizeOuter(0))
+
+        barChart.append('g')
+          .attr('transform', `translate(0, ${height - margin.bottom})`)
+          .call(d3.axisBottom(xScale).tickSizeOuter(0));
+
+        // var yAxis = g => g
+        //   .attr("transform", `translate(${margin.left},0)`)
+        //   .call(d3.axisLeft(yScale))
+        // //.call(g => g.select(".domain").remove())
+
+        barChart.append('g')
           .attr("transform", `translate(${margin.left},0)`)
-          .call(d3.axisLeft(y))
-          .call(g => g.select(".domain").remove())
+          .call(d3.axisLeft(yScale));
 
-        svg.append("g")
-          .attr("fill", "steelblue")
-          .selectAll("rect")
-          .attr("x", x(p.data.name))
-          .attr("y", y(p.value))
-          .attr("height", height)
-          .attr("width", x.bandwidth());
 
-        svg.append("g")
-          .call(xAxis);
-
-        svg.append("g")
-          .call(yAxis);
+        barChart.selectAll()
+          .data(p.children)
+          .enter()
+          .append('rect')
+          .attr('x', s => xScale(s.data.name))
+          .attr('y', s => yScale(s.value))
+          .attr('height', s => height - yScale(s.value))
+          .attr('width', xScale.bandwidth())
 
       } else {
 
