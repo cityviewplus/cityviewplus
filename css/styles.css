@@ -1,4 +1,3 @@
-
 html, body {
   height: 100%;
 }
@@ -15,47 +14,6 @@ body {
   z-index: 1;
 }
 
-.navbar {
-
-}
-
-header {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-  background-size: cover;
-  background-image: url('http://i.imgur.com/v7KNPTq.gif');
-  text-align: center;
-  color: white;
-}
-
-.header-content {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0 50px;
-}
-
-.header-content-inner {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 150px;
-}
-
-.has-bg-img {
-  /* background: url('http://i.imgur.com/v7KNPTq.gif')center center; */
-  background: url('/images/Boston_Back_Bay_reflection.jpg')center center;
-  background-size: cover;
-}
-
-#homepage-landing {
-  /* position: absolute;
-  top: 80px;
-  right: 200px; */
-  /* background-color: rgba(160, 160, 160, 0.4); */
-}
-
 #leaflet-map {
   z-index: 0;
 }
@@ -64,29 +22,11 @@ header {
   height: 100%
 }
 
-.container {
-  max-width: inherit;
-  width: 100%;
-  height: 100%;
+.navbar {
+  padding: 0 10px 0 10px;
 }
 
-#chart {
-  display: inline-block;
-}
-
-#barChart {
-  padding-top: 70px;
-  padding-left: 30px;
-  display: inline-block;
-}
-
-<<<<<<< HEAD
 .bd-lead {
   margin-left: -3rem;
   padding: 3rem;
 }
-=======
-.bar {
-  fill: #80cbc4;
-} 
->>>>>>> develop

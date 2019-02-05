@@ -3,7 +3,6 @@ var map = L.map('leaflet-map', {
 }).setView([42.3601, -71.0589], 13);
 var showingWifi = false;
 var wifiLayer = null;
-var treesHeat = null;
 
 var treesCluster = L.markerClusterGroup({
   // iconCreateFunction is used if we are not using MarkerCluster.Default.css
@@ -99,45 +98,28 @@ function loadTreesLayer() {
   request.send();
   */
 
-  //d3.csv("datasets/Trees.csv", function(d) {
-  d3.csv("datasets/clustered_trees.csv", function(d) {
+  d3.csv("datasets/Trees.csv", function(d) {
     console.time('loadTreesLayer');
     var dataLength = d.length;
     var latList = [];
     var lonList = [];
-    var coordList = [];
     // iterate over all data points
     for (var i = 0; i < dataLength; i++) {
-      // latList.push(Number(d[i].Y));
-      // lonList.push(Number(d[i].X));
-
-      var array = [];
-
-      array.push(Number(d[i].lat));
-      array.push(Number(d[i].lon));
-      array.push(0.2);
-
-      coordList.push(array)
+      latList.push(Number(d[i].Y));
+      lonList.push(Number(d[i].X));
     }
 
     // Add markers to cluster group
-    // var treesMarkerList = [];
-    // for (var i = 0; i < dataLength; i++) {
-    //   var marker = L.circleMarker(getLatLon(i, latList, lonList), {
-    //     radius: 1,
-    //     color: 'green'
-    //   });
-    //   treesMarkerList.push(marker);
-    // }
-    //
-    // treesCluster.addLayers(treesMarkerList);
+    var treesMarkerList = [];
+    for (var i = 0; i < dataLength; i++) {
+      var marker = L.circleMarker(getLatLon(i, latList, lonList), {
+        radius: 1,
+        color: 'green'
+      });
+      treesMarkerList.push(marker);
+    }
 
-    treesHeat = L.heatLayer(coordList, {
-      minOpacity: 0.5,
-      radius: 30
-    });
-    console.log(treesHeat);
-
+    treesCluster.addLayers(treesMarkerList);
     console.timeEnd('loadTreesLayer');
   });
 }
@@ -148,11 +130,9 @@ function showWifi() {
     return;
   }
 
-  // if (treesCluster != null) {
-  if (treesHeat != null) {
+  if (treesCluster != null) {
     console.log("removing trees layer")
-    //treesCluster.remove();
-    treesHeat.remove()
+    treesCluster.remove();
   }
 
   wifiLayer.addTo(map);
@@ -171,8 +151,7 @@ function showTrees() {
     wifiLayer.remove();
   }
 
-  //treesCluster.addTo(map);
-  treesHeat.addTo(map);
+  treesCluster.addTo(map);
 
   showingWifi = false;
 }
@@ -184,3 +163,4 @@ function getLatLon(i, latList, lonList) {
     lonList[i]
   ];
 };
+
