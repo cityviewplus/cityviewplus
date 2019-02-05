@@ -100,7 +100,7 @@ function loadTreesLayer() {
   */
 
   //d3.csv("datasets/Trees.csv", function(d) {
-  d3.csv("clustered_trees.csv", function(d) {
+  d3.csv("datasets/clustered_trees.csv", function(d) {
     console.time('loadTreesLayer');
     var dataLength = d.length;
     var latList = [];

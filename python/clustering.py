@@ -2,7 +2,7 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 from geopy.distance import great_circle
 from shapely.geometry import MultiPoint
-df = pd.read_csv('datasets/Trees.csv')
+df = pd.read_csv('../datasets/Trees.csv')
 # lat = Y, lon = X
 coords = df.as_matrix(columns=['Y', 'X'])
 
@@ -22,4 +22,4 @@ centermost_points = clusters.map(get_centermost_point)
 
 lats, lons = zip(*centermost_points)
 rep_points = pd.DataFrame({'lon':lons, 'lat':lats})
-rep_points.to_csv('clustered_trees.csv')
+rep_points.to_csv('../datasets/clustered_trees.csv')
