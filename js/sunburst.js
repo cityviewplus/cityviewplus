@@ -2,15 +2,18 @@ var query = `SELECT * FROM "20f64c02-6023-4280-8131-e8c0cedcae9b"`;
 
 getData(query, function(jsonArray) {
 
-  var height = 750;
-  var width = 750;
+  var height = 770;
+  var width = 770;
   var radius = width / 8;
   var pMargin = 30
+
+  var barHeight = 500;
+  var barWidth = 500;
 
   margin = ({
     top: 20,
     right: 0,
-    bottom: 30,
+    bottom: 0,
     left: 40
   })
 
@@ -218,12 +221,12 @@ getData(query, function(jsonArray) {
 
         var xScale = d3.scaleBand()
           .domain(p.children.map(s => s.data.name))
-          .range([margin.left, width - margin.right])
+          .range([margin.left, barWidth - margin.right])
           .padding(0.1)
 
         var yScale = d3.scaleLinear()
           .domain([0, 100])
-          .range([height - margin.bottom, margin.top])
+          .range([barHeight - margin.bottom, margin.top])
 
 
         // var xAxis = g => g
@@ -233,7 +236,7 @@ getData(query, function(jsonArray) {
         //   .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
         barChart.append('g')
-          .attr('transform', `translate(0, ${height - margin.bottom})`)
+          .attr('transform', `translate(0, ${barHeight - margin.bottom})`)
           .call(d3.axisBottom(xScale).tickSizeOuter(0));
 
         // var yAxis = g => g
@@ -250,9 +253,10 @@ getData(query, function(jsonArray) {
           .data(p.children)
           .enter()
           .append('rect')
+          .attr('class', 'bar')
           .attr('x', s => xScale(s.data.name))
           .attr('y', s => yScale(s.value))
-          .attr('height', s => height - yScale(s.value))
+          .attr('height', s => barHeight - yScale(s.value))
           .attr('width', xScale.bandwidth())
 
       } else {

@@ -26,3 +26,22 @@ body {
   padding: 0 10px 0 10px;
 }
 
+.container {
+  max-width: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+#chart {
+  display: inline-block;
+}
+
+#barChart {
+  padding-top: 70px;
+  padding-left: 30px;
+  display: inline-block;
+}
+
+.bar {
+  fill: #80cbc4;
+}
