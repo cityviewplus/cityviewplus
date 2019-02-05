@@ -45,7 +45,7 @@ header {
 
 .has-bg-img {
   /* background: url('http://i.imgur.com/v7KNPTq.gif')center center; */
-  background: url('/images/Boston_Back_Bay_reflection.jpg')center center;
+  background: url('../images/Boston_Back_Bay_reflection.jpg')center center;
   background-size: cover;
 }
 
