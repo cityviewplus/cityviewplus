@@ -7,7 +7,7 @@ body {
   padding-top: 3.5rem
 }
 
-#navBar {
+#nav-bar {
   position: fixed;
   top: 0;
   right: 0;
@@ -82,4 +82,4 @@ header {
 
 .bar {
   fill: #80cbc4;
-} 
+}
