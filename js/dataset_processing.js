@@ -1,4 +1,4 @@
-/*
+/**
  * Queries a specified dataset from Analyze Boston or a specified url
  * @param {string} query - Query string (resource id = table name, use template string to wrap the query,
  * use double quotes to wrap the table names, and use single quotes to wrap the column names)
@@ -27,7 +27,7 @@ function getData(query, callback, url) {
   request.send();
 }
 
-/*
+/**
  * Extracts dataset from Json object we get from Analyze Boston
  * @param {Json} rawJson - Json object retrieved within getData(),
  * data is usually under result > records
@@ -45,14 +45,14 @@ function extractData(rawJson) {
 
 }
 
-/*
+/**
  * Creates a new Json object with a Json array as its child in a key-value pairs
  * @param {Json array} dataJsonArray -
  * @param {string} name - a descriptive name that describes the data that the child Json array contains
  * @param {string} nameKey - optional string for the name key
  * @param {string} childKey - optional string for the child key
  * @return {Json} json - new Json object
-*/
+ */
 function addChildToJson(dataJsonArray, name, nameKey, childKey) {
   nameKey = nameKey || 'name';
   childKey = childKey || 'children';
