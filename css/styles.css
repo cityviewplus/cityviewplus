@@ -3,7 +3,8 @@ html, body {
 }
 
 body {
-  padding-top: 3.5rem
+  padding-top: 3.5rem;
+  background-color: #e5e5e5;
 }
 
 #nav-bar {
@@ -14,7 +15,14 @@ body {
   z-index: 1;
 }
 
-.navbar {}
+.section {
+  background-color: #e5e5e5;
+}
+
+.hero.is-light {
+  background-color: #e5e5e5;
+}
+
 
 header {
   position: relative;
@@ -42,15 +50,13 @@ header {
 
 .has-bg-img {
   /* background: url('http://i.imgur.com/v7KNPTq.gif')center center; */
-  background: url('../images/Boston_Back_Bay_reflection.jpg')center center;
+  background: url('/images/Boston_Back_Bay_reflection.jpg')center center;
   background-size: cover;
 }
 
-#homepage-landing {
-  /* position: absolute;
-  top: 80px;
-  right: 200px; */
-  /* background-color: rgba(160, 160, 160, 0.4); */
+.has-bg-gif {
+  background: url('/images/traffic.gif')center center;
+  background-size: cover;
 }
 
 #leaflet-map {
